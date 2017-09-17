@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphQL.Api", "GraphQL.Api.csproj", "{FA4BE62F-A358-4CE7-96C3-BCB18706CBF0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphQL.StarWars", "..\GraphQL.StarWars\GraphQL.StarWars.csproj", "{EC1292A9-34BA-4198-B870-7BE52A7559F6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,5 +15,9 @@ Global
 		{FA4BE62F-A358-4CE7-96C3-BCB18706CBF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA4BE62F-A358-4CE7-96C3-BCB18706CBF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA4BE62F-A358-4CE7-96C3-BCB18706CBF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC1292A9-34BA-4198-B870-7BE52A7559F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC1292A9-34BA-4198-B870-7BE52A7559F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC1292A9-34BA-4198-B870-7BE52A7559F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC1292A9-34BA-4198-B870-7BE52A7559F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
