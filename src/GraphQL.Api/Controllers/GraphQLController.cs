@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Net;
-using System.Net.Http;
+﻿using System.Net;
 using System.Threading.Tasks;
 using GraphQL.Http;
 using GraphQL.Instrumentation;
@@ -18,7 +16,6 @@ namespace GraphQL.Api.Controllers
         private readonly ISchema _schema;
         private readonly IDocumentExecuter _executer;
         private readonly IDocumentWriter _writer;
-        private readonly IDictionary<string, string> _namedQueries;
 
         public GraphqlController(
             IDocumentExecuter executer,
@@ -28,18 +25,6 @@ namespace GraphQL.Api.Controllers
             _executer = executer;
             _writer = writer;
             _schema = schema;
-
-            _namedQueries = new Dictionary<string, string>
-            {
-                ["a-query"] = @"query foo { hero { name } }"
-            };
-        }
-
-        // This will display an example error
-        [HttpGet]
-        public Task<ActionResult> GetAsync(HttpRequestMessage request)
-        {
-            return PostAsync(new GraphQLQuery { Query = "query foo { hero }", Variables = null });
         }
 
         [HttpPost]
@@ -47,11 +32,6 @@ namespace GraphQL.Api.Controllers
         {
             var queryToExecute = query.Query;
             var inputs = JsonConvert.SerializeObject(query.Variables).ToInputs();
-
-            if (!string.IsNullOrWhiteSpace(query.NamedQuery))
-            {
-                queryToExecute = _namedQueries[query.NamedQuery];
-            }
 
             var result = await _executer.ExecuteAsync(_ =>
             {

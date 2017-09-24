@@ -1,5 +1,6 @@
 ﻿using GraphQL.Types;
 
+
 namespace GraphQL.StarWars
 {
     public class HumanInputType : InputObjectGraphType
