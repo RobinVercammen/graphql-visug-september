@@ -110,14 +110,125 @@ public class ShoppingCartController : ApiController
 </h1>
 
 
-## SERVER
+<h2><i class="fa fa-server fa-2x"></i></h2>
+```C#
+public class CartQuery : ObjectGraphType<object>
+    {
+        public CartQuery(CartData data)
+        {
+            Name = "CartQuery";
+
+            Field<ObjectGraphType<Int>>(
+                "total",
+                resolve: context => data.GetTotal(context);
+            );
+
+            var func = (context, cartId) => data.GetCartItems(cartId); // Func<ResolveFieldContext<object>, string, object>
+
+            FieldDelegate<ObjectGraphType<IEnumerable<Items>>>(
+                "items",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<StringGraphType>> { Name = "cartId", Description = "cartId" }
+                ),
+                resolve: func
+            );
+        }
+    }
+```
 
 
-## CLIENT
+<h2><i class="fa fa-laptop fa-2x"></i></h2>
+```json
+{
+    "total"
+    "items": {
+        "name"
+        "detaildescription"
+    }
+}
+```
+```http
+HTTP POST /api/graphql
+{  
+   "query":"query getCart($cartId: String!) {\n  cart(id: $cartId) {\n    total\n    items {\n      name\n      detaildescription\n      }\n  }\n}\n",
+   "variables":{  
+      "cartId":"1"
+   },
+   "operationName":"getCart"
+}
+```
 
 
-## CLIENTS
+<h2><i class="fa fa-mobile fa-2x"></i></h2>
+```json
+{
+    "total"
+    "items": {
+        "name"
+    }
+}
+```
+```http
+HTTP POST /api/graphql
+{  
+   "query":"query getCart($cartId: String!) {\n  cart(id: $cartId) {\n    total\n    items {\n      name\n      }\n  }\n}\n",
+   "variables":{  
+      "cartId":"1"
+   },
+   "operationName":"getCart"
+}
+```
+
+
+<h2>
+<i class="fa fa-mobile fa-3x"></i>
+<i class="fa fa-tablet fa-3x"></i>
+<i class="fa fa-laptop fa-3x"></i>
+<i class="fa fa-desktop fa-3x"></i>
+</h2>
+<h3><i class="fa fa-check fa-2x"></i></h3>
+
+
+```http
+HTTP POST /api/graphql
+{  
+   "query":"query getCart($cartId: String!) {\n  cart(id: $cartId) {\n    total\n    items {\n      name\n      }\n  }\n}\n",
+   "variables":{  
+      "cartId":"1"
+   },
+   "operationName":"getCart"
+}
+```
+<h2><i class=" fa fa-keyboard-o fa-3x"></i></h2>
+
+
+```javascript
+import { Apollo, ApolloQueryObservable } from 'apollo-angular';
+import gql from 'graphql-tag';
+
+const GetCart = gql`
+query getCart($idValue: String!) {
+  cart(cartId: $cartId) {
+    total
+    items {
+      name
+    }
+  }
+}`;
+
+this.apollo.watchQuery({
+    query: GetCart,
+    variables: {
+    cartId: i + ''
+    }
+}
+```
+<h2><i class="fa fa-thumbs-o-up fa-3x"></i></h2>
 
 
 
-<h2><i class="material-icons mi-x5">question_answer</i></h2>
+<h1><i class=" fa fa-code fa-5x"></i></h1>
+
+
+
+<h1><i class="material-icons mi-x5">question_answer</i></h1>
